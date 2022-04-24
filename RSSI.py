@@ -11,7 +11,7 @@ VehicleLocation: Location distribution of all vehicles
 Power: Transmit power
 
 Output:
-Received Power distribution on all resouces
+Distribution of received power strength on all resouces
 """
 from Distance import Distance
 
