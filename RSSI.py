@@ -2,6 +2,16 @@
 """
 Created on Thu Sep  2 11:16:48 2021
 @author: XIN
+
+Input: 
+i: vehicle ID
+ResList: Resource selection list for all vehicles
+VehicleNum: Number of vehicles
+VehicleLocation: Location distribution of all vehicles
+Power: Transmit power
+
+Output:
+Received Power distribution on all resouces
 """
 from Distance import Distance
 
