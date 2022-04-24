@@ -127,7 +127,7 @@ def run_simu(VehicleNum,TargetDistance,RCRange,ThresholdList,IntraDistance):
             totalcollision=0
             total_count_selection=0
             for i in range(0,len(StatisticVehicleRange)):
-                AllCollisionRecord[s]=ChangeRowandColumn(CollisionRecordlist[s][i])
+                AllCollisionRecord[s]=ConvertRowsintoColumns(CollisionRecordlist[s][i])
                 success, fail, collision,count_selection = CountConsecutiveNumber(AllCollisionRecord[s],1,ReselectionTimeSpotlist[s][i],SimulationTime,BeaconRate,ReselectedRClist[s][i],StartTime,maximalTime)
                 totalsuccess += success
                 totalfail += fail
