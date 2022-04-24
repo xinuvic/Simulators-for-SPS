@@ -2,6 +2,8 @@
 """
 Created on Thu Sep  2 11:11:38 2021
 @author: XIN
+Note that vehicle locations can be generated either by importing the tracefiles from SUMO 
+or using the GenerateVehicleLocation.py file (exponential distribution given the vehicle density).
 """
 #import random
 import numpy as np
