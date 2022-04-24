@@ -10,7 +10,7 @@ import random
 from random import choice
 from GenerateVehicleLocation import GenerateVehicleLocation
 from ResSelectionInitial import ResSelectionInitial
-from ChangeRowandColumn import ChangeRowandColumn
+from ConvertRowsintoColumns import ConvertRowsintoColumns
 from CountConsecutiveColli import CountConsecutiveNumber
 from Distance import Distance
 from CalculateSINR import CalculateSINR
@@ -91,7 +91,7 @@ def run_simu(VehicleNum,TargetDistance,RCRange,ThresholdList,IntraDistance):
     HigherBound=RCRange[1]        
     RClist = [random.randint(LowerBound,HigherBound) for i in range(0,VehicleNum)] 
     
-    PacketCollision00list=[[]]*runningtime
+    PacketCollisionlist=[[]]*runningtime
     CollisionRecordlist=[[]]*runningtime
     AllCollisionRecord=[[]]*runningtime
     ReselectionTimeSpotlist=[[]]*runningtime
@@ -105,12 +105,12 @@ def run_simu(VehicleNum,TargetDistance,RCRange,ThresholdList,IntraDistance):
         VehicleLocation = GenerateVehicleLocation(VehicleNum,FirstVehicleLocation,VehicleLength,IntraDistance,LaneNum) 
         ResSelectionini= ResSelectionInitial(VehicleNum,ResNum)
         PacketCollision00,ReselectionTimeSpot,CollisionRecordAll,ReselectedRC = SimulationwithSPS(ResSelectionini,TargetDistance,RClist,VehicleNum,StartTime,VehicleLocation,RCRange,StatisticVehicleRange)        
-        PacketCollision00list[s]=PacketCollision00
+        PacketCollisionlist[s]=PacketCollision00
         CollisionRecordlist[s]=CollisionRecordAll
         ReselectionTimeSpotlist[s]=ReselectionTimeSpot        
         ReselectedRClist[s]=ReselectedRC
-    PacketCollision00 = sum(PacketCollision00list)/float(len(PacketCollision00list))
-    PacketCollision00std = math.sqrt(sum([(i-PacketCollision00)**2 for i in PacketCollision00list])/len(PacketCollision00list))
+    PacketCollision00 = sum(PacketCollisionlist)/float(len(PacketCollisionlist))
+    PacketCollision00std = math.sqrt(sum([(i-PacketCollision00)**2 for i in PacketCollisionlist])/len(PacketCollisionlist))
     StdPC00.append(PacketCollision00std)
     print('t from %d'%StartTime,'to %d'%int(SimulationTime))
     ACP=[]
