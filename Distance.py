@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Sep  2 11:13:05 2021
-@author: CSUST
+@author: XIN
 """
 import math
 def Distance(i,j,VehicleLocation):
