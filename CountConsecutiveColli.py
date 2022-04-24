@@ -2,6 +2,16 @@
 """
 Created on Thu Sep  2 11:09:36 2021
 @author: XIN
+Input: the list indicating collision/success for channel access
+timespot: timespot of resource selection for one vehicle
+SimulationTime: Total duration of simulation
+BeaconRate: Beacon rate
+RC: RC range
+StartTime: the starting point for simulation result recording
+maximalTime: Maximal tolerable time of access failure
+
+Output:
+CountSucceed,CountFail,collision,s
 """
 
 def CountConsecutiveNumber(Alist,number,timespot,SimulationTime,BeaconRate,RC,StartTime,maximalTime):
