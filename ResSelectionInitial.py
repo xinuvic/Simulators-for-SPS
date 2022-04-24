@@ -2,6 +2,12 @@
 """
 Created on Thu Sep  2 11:18:48 2021
 @author: XIN
+
+Input: 
+VehicleNum: Number of vehicles
+ResNum: Number of resources
+
+Output: random resource selection
 """
 import random
 def ResSelectionInitial(VehicleNum,ResNum):
