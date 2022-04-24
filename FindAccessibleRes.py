@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-# -*- coding: utf-8 -*-
 """
 Created on Thu Sep  2 11:17:46 2021
 @author: XIN
+Input:
+i: Vehicle ID
+AverageRSSI: RSSI distribution detected by vehicle i.
+ResList: Resource selection list for all vehicles
+ResNum: Total number of Resources
+AccessibleResRatio: Ratio of accessible resources and all resources within a selection window
+Output:
+Least a% interferred resources, a% is given with AccessibleResRatio
 """
 import numpy as np
 
