@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Created on Wed Dec 29 01:47:07 2021
 @author: XIN
@@ -96,7 +95,7 @@ def run_simu(VehicleNum,TargetDistance,RCRange,ThresholdList,IntraDistance):
     AllCollisionRecord=[[]]*runningtime
     ReselectionTimeSpotlist=[[]]*runningtime
     ReselectedRClist=[[]]*runningtime
-    StdPC00=[]
+    StdPC=[]
     StatisticVehicleRange=range(int(VehicleNum*3/10),int(VehicleNum*7/10)+1)    
     
     for s in range(0,runningtime):
@@ -111,7 +110,7 @@ def run_simu(VehicleNum,TargetDistance,RCRange,ThresholdList,IntraDistance):
         ReselectedRClist[s]=ReselectedRC
     PacketCollision00 = sum(PacketCollisionlist)/float(len(PacketCollisionlist))
     PacketCollision00std = math.sqrt(sum([(i-PacketCollision00)**2 for i in PacketCollisionlist])/len(PacketCollisionlist))
-    StdPC00.append(PacketCollision00std)
+    StdPC.append(PacketCollision00std)
     print('t from %d'%StartTime,'to %d'%int(SimulationTime))
     ACP=[]
     DOP=[]
