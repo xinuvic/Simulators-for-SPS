@@ -4,6 +4,16 @@ Created on Thu Sep  2 11:11:38 2021
 @author: XIN
 Note that vehicle locations can be generated either by importing the tracefiles from SUMO 
 or using the GenerateVehicleLocation.py file (exponential distribution given the vehicle density).
+
+Input:
+NumberVehicle: Number of vehicles
+FirstVehicleLocation: The first vehicle's location
+VehicleLength: Length for each vehicle
+IntraDistance: Average inter-vehicle distance
+lane: Number of lanes
+
+Output:
+Location distribution for all vehicles
 """
 #import random
 import numpy as np
