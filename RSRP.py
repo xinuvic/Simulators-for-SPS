@@ -13,6 +13,7 @@ Power: Transmit power
 Output:
 Distribution of received power strength on all resouces
 """
+
 from Distance import Distance
 
 def RSRP(i,ResList,ResNum,VehicleNum,VehicleLocation,Power):
