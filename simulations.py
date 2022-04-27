@@ -13,7 +13,7 @@ from ConvertRowsintoColumns import ConvertRowsintoColumns
 from CountConsecutiveColli import CountConsecutiveNumber
 from Distance import Distance
 from CalculateSINR import CalculateSINR
-from RSSI import RSSI
+from RSRP import RSRP
 from FindAccessibleRes import FindAccessibleRes
     
 def SimulationwithSPS(ResSelectionini,TargetDistance,RClist,VehicleNum,StartTime,VehicleLocation,RCRange,StatisticVehicleRange):
@@ -21,10 +21,10 @@ def SimulationwithSPS(ResSelectionini,TargetDistance,RClist,VehicleNum,StartTime
     HigherBound=RCRange[1]   
     AveRC=int(np.average(RCRange))
         
-    RSSIEach = [0]*ResNum    
-    RSSIEachStatistic=[[] for i in range(0,VehicleNum)]
-    sumRSSI = []
-    AverageRSSI = []
+    RSRPEach = [0]*ResNum    
+    RSRPEachStatistic=[[] for i in range(0,VehicleNum)]
+    sumRSRP = []
+    AverageRSRP = []
     PacketCollision = 0
     alltrans=0
     CollisionRecordAll=[]
@@ -45,19 +45,19 @@ def SimulationwithSPS(ResSelectionini,TargetDistance,RClist,VehicleNum,StartTime
         
         for i in range(0,VehicleNum):
             RClist[i]=RClist[i]-1
-            RSSIEach = RSSI(i,ResSelectionall,ResNum,VehicleNum,VehicleLocation,TransmitPower_mw)
-            RSSIEachStatistic[i].append(RSSIEach)
+            RSRPEach = RSRP(i,ResSelectionall,ResNum,VehicleNum,VehicleLocation,TransmitPower_mw)
+            RSRPEachStatistic[i].append(RSSIEach)
             if t<AveRC:
-                sumRSSI = np.sum(RSSIEachStatistic[i],axis=0)
-                AverageRSSI = [m/t for m in sumRSSI]
+                sumRSRP = np.sum(RSRPEachStatistic[i],axis=0)
+                AverageRSRP = [m/t for m in sumRSRP]
             else:
-                sumRSSI = np.sum(RSSIEachStatistic[i][t-AveRC+1:],axis=0)
-                AverageRSSI = [i/AveRC for i in sumRSSI]
+                sumRSRP = np.sum(RSRPEachStatistic[i][t-AveRC+1:],axis=0)
+                AverageRSRP = [i/AveRC for i in sumRSRP]
             if RClist[i] == 0:
                 RClist[i]=random.randint(LowerBound,HigherBound)
                 p = random.random()
                 if p > ProbabilityofPersistance:
-                    temp = FindAccessibleRes(i,AverageRSSI,ResSelectionall,ResNum,0.2)
+                    temp = FindAccessibleRes(i,AverageRSRP,ResSelectionall,ResNum,0.2)
                     ResSelected = choice(temp)
                     ResSelection_i = ResSelected
                     ResSelectionEachRound[i] = ResSelection_i
