@@ -13,6 +13,8 @@ Power: Transmit Power
 
 from ResCollisionCheck import ResCollisionCheck
 from Distance import Distance
+import numpy as np
+
 def CalculateSINR(i,j,R,VehicleNum,VehicleLocation,Power):
     Interference=0
     for s in range(0,VehicleNum):
@@ -24,5 +26,5 @@ def CalculateSINR(i,j,R,VehicleNum,VehicleLocation,Power):
                 if ResCollisionCheck(i,s,R) == 1:
                     #same = 1
                     Interference += Power*Distance(s,j,VehicleLocation)**(-3.68)
-    SINR = (Power*Distance(i,j,VehicleLocation)**(-3.68))/(Interference+10**(-6.46))
+    SINR = 10*np.log10((Power*Distance(i,j,VehicleLocation)**(-3.68))/(Interference+10**(-6.46)))
     return SINR
