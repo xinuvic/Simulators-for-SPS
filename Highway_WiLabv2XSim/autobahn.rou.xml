@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2022-05-18 10:01:57 by Eclipse SUMO netedit Version 1.13.0
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <!-- Routes -->
+    <route id="r_0" edges="WE E3 E0 E1 E2 EW E4 E5 E6 E7 WE"/>
+    
+
+    <!-- Vehicles, persons and containers (sorted by depart) -->
+	<vType id="car" length="5" maxSpeed="40"/>
+	<vType id="platoon" length="5" maxSpeed="40" tau="0.1" minGap="0.1"/>
+	<vType id="leader" length="5" maxSpeed="35" color="red" tau="0.1" minGap="0.1"/>
+	<vType id="follower" length="5" maxSpeed="50" color="blue"  tau="0.1" minGap="0.1"/>
+	<vType id="catch_up" length="5" maxSpeed="40" color ="green" tau="0.1" minGap="0.1"/>
+
+	<flow id="77777" from="EW" to="WE" begin="0" end="0" number="15" departPos="last" departSpeed="max" departLane="0" type="platoon"/>
+	
+	<flow id="11111" from="WE" to="EW" begin="0" end="0" number="20" departPos="random_free" departSpeed="max" departLane="0" type="car"/>
+	<flow id="22222" from="WE" to="EW" begin="0" end="0" number="20" departPos="random_free" departSpeed="max" departLane="1" type="car"/>
+	<flow id="33333" from="WE" to="EW" begin="0" end="0" number="20" departPos="random_free" departSpeed="max" departLane="2" type="car"/>
+
+	<flow id="44444" from="EW" to="WE" begin="0" end="0" number="20" departPos="random_free" departSpeed="max" departLane="1" type="car"/>
+	<flow id="55555" from="EW" to="WE" begin="0" end="0" number="20" departPos="random_free" departSpeed="max" departLane="2" type="car"/>
+	
+</routes>

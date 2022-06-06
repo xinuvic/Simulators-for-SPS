@@ -1,0 +1,10 @@
+<configuration>
+   <input>
+       <net-file value="autobahn.net.xml"/>
+       <route-files value="autobahn.rou.xml"/>
+	<additional-files value = 'additional.xml'/>
+   </input>	
+
+	<step-length value="0.1"/>
+
+</configuration>
