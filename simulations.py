@@ -73,7 +73,7 @@ def SimulationwithSPS(ResSelectionini,TargetDistance,RClist,VehicleNum,StartTime
                 for j in range(0,int(VehicleNum*4/4)):
                     if i == j:
                         continue
-                    if Distance(i,j,VehicleLocation)<TargetDistance and CalculateSINR(i,j,ResSelectionall,VehicleNum,VehicleLocation,TransmitPower_mw)<2.76:
+                    if Distance(i,j,VehicleLocation)<TargetDistance and CalculateSINR(i,j,ResSelectionall,VehicleNum,VehicleLocation,TransmitPower_mw)<sinr_th:
                         PacketCollision+=1
                         CollisionRecord.append(1)
                     elif Distance(i,j,VehicleLocation)<TargetDistance:
@@ -180,7 +180,8 @@ print('Probability of Persistance:',ProbabilityofPersistance)
 VehicleLength = 4.0 
 TransmitPowerdBm= 23
 TransmitPower_mw = 10**(TransmitPowerdBm/10)
-
+sinr_th_db=2.76
+sinr_th=10**(sinr_th_db/10)
 
 # run the simulator
 if __name__ == '__main__':
