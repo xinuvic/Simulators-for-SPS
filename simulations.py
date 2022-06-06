@@ -180,8 +180,8 @@ print('Probability of Persistance:',ProbabilityofPersistance)
 VehicleLength = 4.0 
 TransmitPowerdBm= 23
 TransmitPower_mw = 10**(TransmitPowerdBm/10)
-sinr_th_db=2.76
-sinr_th=10**(sinr_th_db/10)
+sinr_th_db = 2.76
+sinr_th = 10**(sinr_th_db/10)
 
 # run the simulator
 if __name__ == '__main__':
