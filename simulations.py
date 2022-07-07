@@ -13,7 +13,7 @@ from ConvertRowsintoColumns import ConvertRowsintoColumns
 from CountConsecutiveColli import CountConsecutiveNumber
 from Distance import Distance
 from CalculateSINR import CalculateSINR
-from RSSI.py import RSSI.py
+from RSSI import RSSI
 from FindAccessibleRes import FindAccessibleRes
     
 def SimulationwithSPS(ResSelectionini,TargetDistance,RClist,VehicleNum,StartTime,VehicleLocation,RCRange,StatisticVehicleRange):
