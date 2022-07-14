@@ -1,9 +1,0 @@
-<configuration>
-	<vehicleSelectors value="platoon" />
-        <vTypeMap original="platoon" leader="leader" follower="follower" catchup="catch_up" />
-	<maxPlatoonGap value="40"/>
-	<speedFactor follower="1.4" catchup="1.8" leader= "1.0" />
-	<catchupDist value="150"/>
-	<platoonSplitTime value="50" />
-    
-</configuration>
