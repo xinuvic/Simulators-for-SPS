@@ -162,8 +162,6 @@ def main():
     print('%s: Collision Probability'%str(RCRange),ColRatio,'std',colStd)
     print('%s: Delay Outage Probability'%str(RCRange),del_ratio,'std',delStd)
 
- 
-     
 
 # =============================================================================
 # Parameter setting
@@ -186,7 +184,6 @@ TransmitPowerdBm= 23
 TransmitPower_mw = 10**(TransmitPowerdBm/10)
 sinr_th_db = 2.76
 sinr_th = 10**(sinr_th_db/10)
-
 
 # =============================================================================
 # import road traffic
