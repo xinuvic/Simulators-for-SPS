@@ -25,7 +25,7 @@ parser = argparse.ArgumentParser(description=\
 
                                 
 parser.add_argument('--cr', type=float, default=0.2)
-parser.add_argument('--r', type=int, default=20000)
+parser.add_argument('--r', type=int, default=200000)
 parser.add_argument('--td', type=float, default=200)
 parser.add_argument('--sst', type=int, default=0)
 parser.add_argument('--itv', type=int, default=100)
@@ -53,7 +53,7 @@ def generate_RBGs(num_slot,num_subch):
 def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high,RSRP_ratio_beacon):
     # parameter settings
     transmit_power = 200
-    time_period_all = 10000
+    time_period_all = 200000
     num_subch = 4
     
     RCrange = [RC_low,RC_high]
