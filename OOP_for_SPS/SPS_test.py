@@ -21,7 +21,7 @@ parser = argparse.ArgumentParser(description=\
                                  \n--itv: transmission interval of beacon messages,\
                                  \n--rcl: RC lower bound,\
                                  \n--rch: RC higher bound,\
-                                 \n--cr: fixed candidate ratio (10,20,30,40,50,60)')
+                                 \n--cr: fixed candidate ratio (0.1,0.2,0.3,0.4,0.5,0.6)')
 
                                 
 parser.add_argument('--cr', type=float, default=0.2)
