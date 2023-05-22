@@ -31,7 +31,6 @@ class Vehicle():
         self.v_em_RBGs_multiple = []
         self.choose_RBGs_multiple = []
         self.message_list = None
-        self.message_list_e = None
         self.power = power
         self.sensepower_1100ms = {}
         self.sensingpower_current_slot = {}
@@ -40,27 +39,17 @@ class Vehicle():
         self.RBGlist_in_slot = []
         self.prepower_in_selection_window = {}
         self.best_RBG_list_beacon = []
-        self.best_RBG_list_em = []
         self.neighbour_list = []
-        self.neighbour_list_em = []
         self.transmission_statistic = []
-        self.transmission_statistic_em = []
-        self.transmission_statistic_noem = []
         self.target_distance = target_distance
         self.reselection_counter = random.randint(RCrange[0], RCrange[1])
         self.RBGs_in_selection_window = []
         self.num_tran = 0
         self.num_rec = 0
-
-
         self.p_resource_keeping = p_resource_keeping
-
         self.RSRP_th = -110.35564074964655
         self.max_upper_bound = 0
-        self.n_sample = 0
-
-        
-        self.slot_for_em =0
+        self.n_sample = 0        
         self.RSRPth_selected=[]
         self.RSRPth_index_selected = []
         self.candidate_ratio_selected = []
@@ -69,15 +58,6 @@ class Vehicle():
         self.features_decision_mapping = {}
         self.k=0
         self.candidate_chosen_list = []
-        self.reward_list = []
-        self.em_sender = False
-        self.preemption=None
-        
-        self.statistic_pdr_multi_dis = {}
-        self.statistic_all_packet_multi_dis = {}
-
-        
-        self.message_RBG_map={}
         self.bm_reception_record = {}
         self.v_RBG_last_one=None
 
