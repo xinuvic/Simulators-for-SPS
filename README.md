@@ -1,6 +1,7 @@
 # Simulators-for-SPS
 
-May 21st, Coding Update:
+
+May 23st, Coding Update:
 The coding has been enhanced using Object-Oriented Programming (OOP), making it easier to extend. Everyone is welcome to utilize the new developed simulator for SPS evaluation. Please access it in the folder "OOP_for_SPS".
 We highly recommend utilizing our newly developed OOP version, as it offers significant advantages for extending the simulator to accommodate new scenarios or applications. 
 Besides the convenience provided by objective-oriented programming, this version provides a finer granularity, operating at the millisecond level instead of interval-level simulation. 
