@@ -2,7 +2,7 @@
 """
 Created on Wed Jan 11 18:36:52 2023
 
-@author: CSUST
+@author: xin
 """
 
 import math
