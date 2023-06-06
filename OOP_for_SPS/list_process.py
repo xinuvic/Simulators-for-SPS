@@ -2,7 +2,7 @@
 """
 Created on Mon Dec 26 16:41:20 2022
 
-@author: CSUST
+@author: xin
 """
 
 def transfer_2Dlist_to_1Dlist(orignal_list):
