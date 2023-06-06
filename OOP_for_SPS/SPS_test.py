@@ -2,7 +2,7 @@
 """
 Created on Sun Feb 26 00:19:25 2023
 
-@author: CSUST
+@author: xin
 """
 
 from Vehicle import Vehicle
