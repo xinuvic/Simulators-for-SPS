@@ -1,6 +1,6 @@
 # Simulators-for-SPS
 ---------------------------------
-May 27th, Coding Instruction Update:
+May 27th, 2023, Coding Instruction Update:
 
 The coding has been enhanced using Object-Oriented Programming (OOP), making it easier to extend. Everyone is welcome to utilize the new developed simulator for SPS evaluation. Please access it in the folder "OOP_for_SPS". Compared to the original version, this simulator runs longer because of the fine granularity, but provides convinence for extension. 
 
