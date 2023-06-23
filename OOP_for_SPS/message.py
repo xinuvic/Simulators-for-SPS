@@ -8,8 +8,8 @@ from RBG import RBG
 
 
 class Message():
-    def __init__(self,mtype,mdelay,mgeneration_time,mserved_RBG):
-        #self.index = index
+    def __init__(self,mtype,mdelay,mgeneration_time,mserved_RBG,mID):
+        self.mID = mID
         self.mtype = mtype
         self.mdelay = mdelay
         self.mgeneration_time = mgeneration_time
@@ -24,8 +24,8 @@ class Message():
 
          
 class Beacon(Message):
-    def __init__(self,mtype,mdelay,mgeneration_time,mserved_RBG,rate):
-        super().__init__(mtype,mdelay,mgeneration_time,mserved_RBG)
+    def __init__(self,mtype,mdelay,mgeneration_time,mserved_RBG,rate,mID):
+        super().__init__(mtype,mdelay,mgeneration_time,mserved_RBG,mID)
         self.rate = rate
         self.interval = 1000*(1/self.rate)
         
@@ -33,8 +33,8 @@ class Beacon(Message):
         self.selection_window = [self.mgeneration_time,self.mgeneration_time+self.interval]
 
 class Emergency(Message):
-    def __init__(self,mtype,mdelay,mgeneration_time,mserved_RBG,lamda,num_RBG):
-        super().__init__(mtype,mdelay,mgeneration_time,mserved_RBG)
+    def __init__(self,mtype,mdelay,mgeneration_time,mserved_RBG,lamda,num_RBG,mID):
+        super().__init__(mtype,mdelay,mgeneration_time,mserved_RBG,mID)
         self.lamda = lamda
         self.num_RBG = num_RBG
         #self.interval = np.random.exponential(scale=self.lamda)

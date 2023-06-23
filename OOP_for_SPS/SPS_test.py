@@ -100,7 +100,7 @@ def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high
         if section_index==0:
             LocationDataAll=np.array(pd.read_csv("C:/Users/adani/OneDrive/Documentos/GitHub/SimulatorSPS/OOP_for_SPS/traffic_data/%s.csv"%(location_file_name),header=None)).tolist()
         else:    
-            LocationDataAll=np.vstack((LocationDataAll,np.array(pd.read_csv("C:/Users/adani/OneDrive/Documentos/GitHub/SimulatorSPS/OOP_for_SPS/traffic_data/  %s.csv"%(location_file_name),header=None)).tolist()))
+            LocationDataAll=np.vstack((LocationDataAll,np.array(pd.read_csv("C:/Users/adani/OneDrive/Documentos/GitHub/SimulatorSPS/OOP_for_SPS/traffic_data/%s.csv"%(location_file_name),header=None)).tolist()))
 
     ObserveVehicles = [[] for i in range(0,time_period)]
     num_vehicle=int(len(LocationDataAll)/time_period_all)
