@@ -115,7 +115,9 @@ class Vehicle():
         for i in range(0,int(time_period/interval)):
             if int(i*interval) >= time_period:
                 break
-            self.message_list[int(i*interval)] = Beacon(0, mdelay, int(i*interval), None, interval)
+            mID=str(self.index)+'-'+str(i)
+            ## print('The ID for the beacon is: '+mID)
+            self.message_list[int(i*interval)] = Beacon(0, mdelay, int(i*interval), None, interval,mID)
 
 
     def genearate_vehicles(num_vehicle, num_slot, vehicle_location, transmit_power):

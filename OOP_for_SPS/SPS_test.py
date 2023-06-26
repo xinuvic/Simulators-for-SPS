@@ -25,7 +25,7 @@ parser = argparse.ArgumentParser(description=\
 
                                 
 parser.add_argument('--cr', type=float, default=0.2)
-parser.add_argument('--r', type=int, default=300000)
+parser.add_argument('--r', type=int, default=10000) ##300000)
 parser.add_argument('--td', type=float, default=200)
 parser.add_argument('--sst', type=int, default=0)
 parser.add_argument('--itv', type=int, default=100)
