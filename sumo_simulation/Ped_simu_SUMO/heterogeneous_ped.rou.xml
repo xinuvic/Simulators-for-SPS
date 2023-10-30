@@ -1,0 +1,57 @@
+<routes>
+  <!--Namespace(N=75, filecount=None, input='routes.txt', launch=False, output='singleIntersection.rou.xml', quarter=100)-->
+  <vType id="car" accel="0.8" decel="4.5" sigma="1.0" length="4" minGap="2.5" maxSpeed="13.89" guiShape="passenger" />
+  
+  <vTypeDistribution id="pedestrian">
+    <vType vClass="pedestrian"   id="slowpedestrian"  maxSpeed="1.0" latAlignment="compact" probability=".33"/>
+    <vType vClass="pedestrian"   id="avgpedestrian"   maxSpeed="1.5" latAlignment="compact" probability=".33"/>
+    <vType vClass="pedestrian"   id="fastpedestrian"  maxSpeed="2.0" latAlignment="compact" probability=".33"/>
+  </vTypeDistribution>
+  
+  <vTypeDistribution id="bicycle">
+    <vType vClass="bicycle"      id="slowbicycle"     maxSpeed="4.2" minGap="0.5" latAlignment="compact" probability=".33"/>
+    <vType vClass="bicycle"      id="avgbicycle"      maxSpeed="5.5" minGap="0.5" latAlignment="compact" probability=".33"/>
+    <vType vClass="bicycle"      id="fastbicycle"     maxSpeed="6.9" minGap="0.5" latAlignment="compact" probability=".33"/>
+  </vTypeDistribution>
+  
+  <vTypeDistribution id="ptw">
+    <vType vClass="motorcycle" id="motorcycle"  personCapacity="2" latAlignment="arbitrary" lcPushy="1.0" minGapLat="0.5" minGap="0.5" probability=".70" tau="1" speedDev="0.1"/>
+    <vType vClass="moped"      id="moped"       personCapacity="1" latAlignment="arbitrary" lcPushy="1.0" minGapLat="0.5" minGap="0.5" probability=".30" tau="1" speedDev="0.1"/>
+  </vTypeDistribution>
+  
+  <route id="1" edges="1/0to1/1 1/1to1/2"/>
+  <route id="2" edges="1/2to1/1 1/1to1/0"/>
+  <route id="3" edges="2/1to1/1 1/1to0/1"/>
+  <route id="4" edges="0/1to1/1 1/1to2/1"/>
+  
+  <flow id="flow5" type="bicycle" route="1" begin="0" vehsPerHour="500" number="1000"/>
+  <flow id="flow6" type="bicycle" route="1" begin="0" vehsPerHour="500" number="1000"/>
+  <flow id="flow7" type="ptw" route="2" begin="0" vehsPerHour="500" number="1000"/>
+  <flow id="flow8" type="ptw" route="2" begin="0" vehsPerHour="500" number="1000"/>
+  <flow id="flow9" type="ptw" route="3" begin="0" vehsPerHour="500" number="1000"/>
+  <flow id="flow19" type="ptw" route="3" begin="0" vehsPerHour="500" number="1000"/>
+  
+  <vehicle id="car0" type="car" route="2" depart="0"/>
+  <person id="pedestrian_1" type="pedestrian" depart="0">
+     <walk edges="1/0to1/1 1/1to1/2"/>
+  </person>
+  <person id="pedestrian_2" type="pedestrian" depart="1">
+     <walk edges="1/0to1/1 1/1to1/2"/>
+  </person> 	
+  <person id="pedestrian_3" type="pedestrian" depart="2">
+     <walk edges="1/0to1/1 1/1to1/2"/>
+  </person> 
+  
+  <vehicle id="car1" type="car" route="2" depart="5"/>
+  <vehicle id="car2" type="car" route="2" depart="10"/>
+  <vehicle id="car3" type="car" route="2" depart="15"/>    
+  <vehicle id="car4" type="car" route="3" depart="20"/>
+  <vehicle id="car5" type="car" route="3" depart="25"/>
+  <vehicle id="car6" type="car" route="3" depart="30"/>
+  <vehicle id="car7" type="car" route="3" depart="35"/>
+  
+
+
+
+  
+</routes>

@@ -25,6 +25,8 @@ class Vehicle():
     
     def __init__(self, index, location, power, p_resource_keeping,RCrange,target_distance):
         self.index = index
+        self.type = location[3]
+        #print(self.type) just to dbug the type
         self.location = location
         self.v_RBG = None
         self.v_em_RBGs_set = []
@@ -40,12 +42,16 @@ class Vehicle():
         self.prepower_in_selection_window = {}
         self.best_RBG_list_beacon = []
         self.neighbour_list = []
+        self.VRUneighbour_list = []  #adding the list of neighbout for VRU
         self.transmission_statistic = []
+        self.VRUtransmission_statistic = [] # Collecting the statistic for VRU neigbohrs
         self.target_distance = target_distance
         self.reselection_counter = random.randint(RCrange[0], RCrange[1])
         self.RBGs_in_selection_window = []
         self.num_tran = 0
         self.num_rec = 0
+        self.VRUnum_tran = 0 # Special metrics for VRU
+        self.VRUnum_rec = 0 # Special metrics for VRU
         self.p_resource_keeping = p_resource_keeping
         self.RSRP_th = -110.35564074964655
         self.max_upper_bound = 0
@@ -115,8 +121,8 @@ class Vehicle():
         for i in range(0,int(time_period/interval)):
             if int(i*interval) >= time_period:
                 break
-            mID=str(self.index)+'-'+str(i)
-            ## print('The ID for the beacon is: '+mID)
+            mID=str(self.index)+'-'+ str(self.type) +'-'+str(i)
+            ## print('The ID and type for the beacon is: '+mID)
             self.message_list[int(i*interval)] = Beacon(0, mdelay, int(i*interval), None, interval,mID)
 
 
@@ -135,7 +141,10 @@ class Vehicle():
     
     def receive_power(self,vehicle):
         k0 = 10**(-4.38)
+        #if self.distance(vehicle) != 0:
         return k0*vehicle.power*self.distance(vehicle)**(-3.68)
+        #else:
+        #    return k0*vehicle.power*0.1**(-3.68)
     
     # check if the slot can be measured by the object vehicle, due to the half duplex
     def observation_boolean(self, v_RBG):
@@ -218,11 +227,15 @@ class Vehicle():
     
     def generate_neighbour_set(self,vehicles):
         self.neighbour_list = []
+        self.VRUneighbour_list = []
         vehicles_copy = copy.copy(vehicles)
         vehicles_copy.remove(self)
         for vehicle in vehicles_copy:
             if self.distance(vehicle)<=self.target_distance:
                 self.neighbour_list.append(vehicle)
+                if vehicle.type == 1 : 
+                    self.VRUneighbour_list.append(vehicle)
+                
                                 
     def sum_interference_power(self,receive_vehicle,vehicles):
         sum_interference = 0
@@ -295,4 +308,32 @@ class Vehicle():
             self.transmission_statistic.append(None)
         else:
             self.transmission_statistic.append(reception/num_packet)
+
+        #repeat the process for VRU neighbours
+
+        reception = 0     
+        num_packet = len(self.VRUneighbour_list)
+        if current_time>start_sampling_time:
+            self.VRUnum_tran += len(self.VRUneighbour_list)
+        #print('t=',current_time,self.index,'neighbour_list',self.neighbour_list)
+        for vehicle in self.VRUneighbour_list:
+            
+            # shorten vehicle.bm_reception_record
+            len_record = len(vehicle.bm_reception_record)
+            popkeys = list(vehicle.bm_reception_record.keys())[:min(len_record-400,0)]
+            [vehicle.bm_reception_record.pop(k) for k in popkeys]    
+
+            if self.check_message_reception(vehicle,vehicles,sinr_th,noise) == True:
+                reception += 1
+                vehicle.bm_reception_record[str([self.index,self.v_RBG.timeslot])]=1
+                
+                if current_time>start_sampling_time:
+                    self.VRUnum_rec += 1
+            else:
+                vehicle.bm_reception_record[str([self.index,self.v_RBG.timeslot])]=0
+        if num_packet==0:
+            self.VRUtransmission_statistic.append(None)
+        else:
+            self.VRUtransmission_statistic.append(reception/num_packet)
+
         

@@ -1,0 +1,14 @@
+<configuration>
+  <input>
+    <net-file value="heterogeneous_ped.net.xml"/>
+    <route-files value="heterogeneous_ped.rou.xml"/>
+  </input>
+  <time>
+    <begin value="0"/>
+    <end value="600"/>
+    <step-length value="0.05"/>
+  </time>
+  <gui_only>
+    <gui-settings-file value="gui-settings.xml"/>
+  </gui_only>
+</configuration>

@@ -21,16 +21,18 @@ parser = argparse.ArgumentParser(description=\
                                  \n--itv: transmission interval of beacon messages,\
                                  \n--rcl: RC lower bound,\
                                  \n--rch: RC higher bound,\
-                                 \n--cr: fixed candidate ratio (0.1,0.2,0.3,0.4,0.5,0.6)')
+                                 \n--cr: fixed candidate ratio (0.1,0.2,0.3,0.4,0.5,0.6),\
+                                 \n--mu: NR numerology for SCS (0,1,2 for FR1)')
 
                                 
 parser.add_argument('--cr', type=float, default=0.2)
-parser.add_argument('--r', type=int, default=10000) ##300000)
+parser.add_argument('--r', type=int, default=300000) #10000)#10000) ##original 300000)
 parser.add_argument('--td', type=float, default=200)
 parser.add_argument('--sst', type=int, default=0)
 parser.add_argument('--itv', type=int, default=100)
 parser.add_argument('--rcl', type=int, default=5)
 parser.add_argument('--rch', type=int, default=15)
+parser.add_argument('--mu', type=int, default=0)
 
 
 
@@ -50,10 +52,10 @@ def generate_RBGs(num_slot,num_subch):
     return RBG_intance_list
   
  
-def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high,RSRP_ratio_beacon):
+def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high,RSRP_ratio_beacon,mu):
     # parameter settings
     transmit_power = 200
-    time_period_all = 300000
+    time_period_all = 300000 #200 #50000 #50000 #10000 #original 300000 
     num_subch = 4
     
     RCrange = [RC_low,RC_high]
@@ -64,9 +66,9 @@ def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high
     sinr_th = 2**(2.1602)-1
     k0 = 10**(-4.38)
     alpha = 3.68
-    
+            
     num_RBs_per_RBG = 10
-    SCS = 15*(10**3)
+    SCS = np.power(15,mu)*(10**3)
     num_sc_per_RB = 12
     bandwidth_per_RB = SCS * num_sc_per_RB
     bandwidth_per_RBG = bandwidth_per_RB * num_RBs_per_RBG
@@ -77,6 +79,11 @@ def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high
     pdr_ratio_list=[]
     transmission_condition=[]
     add_loss_ratio_to_beacon_list = []
+
+    VRUpdr_ratio_list=[]   # For VRU calculation
+    VRUtransmission_condition=[]  # For VRU calculation
+    VRUadd_loss_ratio_to_beacon_list = []  # For VRU calculation
+
     RSRP_th = -110
     candidate_ratio_list=[0.1,0.2,0.3,0.4,0.5]  
 
@@ -95,12 +102,20 @@ def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high
 
     for section_index in range(0,int(time_period_all/10000)):
         #location_file_name = 'sumo_vehicle_location_'+ str(section_index)
-        location_file_name = 'manhattan_location_s20_'+ str(section_index)
+        location_file_name = 'v2manhattan_location_s20_'+ str(section_index)
+        #location_file_name = 'sumo_vehicle_location' # + str(section_index)
         print('section_index',section_index)
         if section_index==0:
             LocationDataAll=np.array(pd.read_csv("C:/Users/adani/OneDrive/Documentos/GitHub/SimulatorSPS/OOP_for_SPS/traffic_data/%s.csv"%(location_file_name),header=None)).tolist()
         else:    
             LocationDataAll=np.vstack((LocationDataAll,np.array(pd.read_csv("C:/Users/adani/OneDrive/Documentos/GitHub/SimulatorSPS/OOP_for_SPS/traffic_data/%s.csv"%(location_file_name),header=None)).tolist()))
+
+    # location_file_name = 'sumo_vehicle_location'
+    # LocationDataAll=np.array(pd.read_csv("C:/Users/adani/OneDrive/Documentos/GitHub/SimulatorSPS/OOP_for_SPS/traffic_data/%s.csv"%(location_file_name),header=None)).tolist()
+    
+    #print('content', LocationDataAll)
+
+    #print('length of content', len(LocationDataAll))
 
     ObserveVehicles = [[] for i in range(0,time_period)]
     num_vehicle=int(len(LocationDataAll)/time_period_all)
@@ -109,7 +124,7 @@ def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high
         ObserveVehicles[i]=LocationDataAll[int(i*num_vehicle):int((i+1)*num_vehicle)]  
     vehicle_location_ini = ObserveVehicles[0]
 
-
+   #print(ObserveVehicles[1])
 
     print('time_period',time_period)
     print('start_sampling_time',start_sampling_time)
@@ -121,12 +136,14 @@ def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high
     print('interval', interval)
     print('transmit_power',transmit_power)
     print('target_distance',target_distance)
-    
+    print('NR numerology',mu)
+
     # =============================================================================
     # initialization
     # =============================================================================
     vehicle_list = genearate_vehicles(num_vehicle,time_period,vehicle_location_ini,\
                                       transmit_power,p_resource_keeping,RCrange,target_distance)
+    #print(vehicle_list[0])
 
     RBG_list = generate_RBGs(time_period,num_subch)
     channel = Channel(num_subch, interval)
@@ -170,18 +187,34 @@ def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high
         if t>start_sampling_time and t%1000==0:
             sum_tran = 0
             sum_rec = 0     
+
+            sum_VRUtran = 0 # collecting metrics for VRU 
+            sum_VRUrec = 0 #  collecting metrics for VRU
+            
             sum_additional_loss_to_beacons = 0
             for vehicle in vehicle_list:
                 vehicle.num_tran_em = 0
                 vehicle.num_rec_em = 0
+                
                 sum_tran += vehicle.num_tran
                 sum_rec += vehicle.num_rec
+
+                sum_VRUtran += vehicle.VRUnum_tran
+                sum_VRUrec += vehicle.VRUnum_rec
+
                 vehicle.num_tran = 0
                 vehicle.num_rec = 0
+
+                vehicle.VRUnum_tran = 0
+                vehicle.VRUnum_rec = 0
                 
             add_loss_ratio_to_beacon_list.append(sum_additional_loss_to_beacons/(sum_additional_loss_to_beacons+sum_rec))
             pdr_ratio_list.append(sum_rec/sum_tran)
             transmission_condition.append([sum_rec,sum_tran])
+
+            VRUadd_loss_ratio_to_beacon_list.append(sum_additional_loss_to_beacons/(sum_additional_loss_to_beacons+sum_VRUrec))
+            VRUpdr_ratio_list.append(sum_VRUrec/sum_VRUtran)
+            VRUtransmission_condition.append([sum_VRUrec,sum_VRUtran])
 
             
     
@@ -196,10 +229,15 @@ def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high
     print('interval', interval)
     print('transmit_power',transmit_power)
     print('target_distance',target_distance)
+    print('NR_numerology',mu)
     print('transmission_condition',transmission_condition)
-    print('PDR:',pdr_ratio_list)
-    print('Overall PDR:',list(map(sum, zip(*transmission_condition)))[0]/list(map(sum, zip(*transmission_condition)))[1])
     
+    print('PDR:',pdr_ratio_list)
+    #print('Overall PDR:',list(map(sum, zip(*transmission_condition)))[0]/list(map(sum, zip(*transmission_condition)))[1])
+    
+    print('Empiric_VAP_transmission_condition',VRUtransmission_condition) # Printing VRU related performance evaluation
+    print('Empiric_VAP_PDR:',VRUpdr_ratio_list)
+
     print('*******************')
 
     print('\n')         
@@ -207,8 +245,11 @@ def main(time_period,target_distance,start_sampling_time,interval,RC_low,RC_high
     
 if __name__ == '__main__':
     args = parser.parse_args()   # 解析所有的命令行传入变量
-    main(args.r,args.td,args.sst,args.itv,args.rcl,args.rch,args.cr)
+    main(args.r,args.td,args.sst,args.itv,args.rcl,args.rch,args.cr,args.mu)
 
 
 
  
+#x = [[0,0,1],[0,0,2],[0,0,1],[0,0,1],[0,0,2],[0,0,1],[0,0,2]]
+#result = [i.pop(2) for i in x]
+#print(result.count(1))

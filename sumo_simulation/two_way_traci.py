@@ -21,7 +21,7 @@ else:
 # =============================================================================
 # change the path based on your configuration
 # =============================================================================
-sumoBinary = r"D:\Eclipse\Sumo\bin\sumo-gui.exe"
+sumoBinary = r"C:\Program Files (x86)\DLR\Sumo\bin\sumo-gui.exe" # updating the SUMO path
 sumoCmd = [sumoBinary, "-c", "autobahn.sumocfg"]
 
     

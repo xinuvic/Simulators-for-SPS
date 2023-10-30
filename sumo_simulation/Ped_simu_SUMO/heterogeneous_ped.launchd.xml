@@ -1,0 +1,7 @@
+<launch>
+  <copy file="heterogeneous_ped.net.xml"/>
+  <copy file="heterogeneous_ped.rou.xml"/>
+  <copy file="heterogeneous_ped.poly.xml"/>
+  <copy file="heterogeneous_ped.sumocfg" type="config"/>
+  <copy file="gui-settings.xml"/>
+</launch>

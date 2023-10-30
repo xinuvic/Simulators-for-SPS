@@ -160,15 +160,16 @@ def main():
 
 
 # Parameter setting
-LaneNum=6
-vehicle_each_lane_withinkm=range(10,100,10)
+LaneNum=1 # original 6 
+vehicle_each_lane_withinkm=range(10,20,10) # original (10:100:10)
 vehicle_withinkm=[int(i*LaneNum) for i in vehicle_each_lane_withinkm]
 vehicle_all_in_simu=[int(i*4) for i in vehicle_withinkm]
+print(vehicle_all_in_simu)
 FirstVehicleLocation = [0,0]
 TargetDistance = 100
-runningtime = 20
+runningtime = 1 #20
 StartTime = 150
-SimulationTime = 250
+SimulationTime = 200 #250
 RCRange = [10,30]
 BeaconRate = 20
 print('beacon rate is',BeaconRate)
