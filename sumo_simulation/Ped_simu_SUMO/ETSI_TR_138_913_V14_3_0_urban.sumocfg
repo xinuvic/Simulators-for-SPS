@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2023-11-23 17:49:21 by Eclipse SUMO sumo Version 1.18.0
+-->
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="ETSI_TR_138_913_V14_3_0_urban.net.xml"/>
+        <route-files value="ETSI_TR_138_913_V14_3_0_urban.rou.xml"/>
+        <additional-files value="ETSI_TR_138_913_V14_3_0_urban.poly.xml"/>
+    </input>
+    
+	<step-length value="0.05"/>
+
+</configuration>
+

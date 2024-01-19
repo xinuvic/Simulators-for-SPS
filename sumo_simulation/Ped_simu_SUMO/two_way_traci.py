@@ -22,7 +22,7 @@ else:
 # change the path based on your configuration
 # =============================================================================
 sumoBinary = r"C:\Program Files (x86)\DLR\Sumo\bin\sumo-gui.exe" # updating the SUMO path
-sumoCmd = [sumoBinary, "-c", "heterogeneous_ped.sumocfg"]
+sumoCmd = [sumoBinary, "-c", "ETSI_TR_138_913_V14_3_0_urban.sumocfg"]
 
     
 
